@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart People Counter - Live Statistics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <span class="icon">📊</span> Smart People Counter
+                </h1>
+                <p class="subtitle">Real-time Crowd Analytics Dashboard</p>
+            </div>
+            <div class="status-indicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span class="status-text" id="statusText">Connecting...</span>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <!-- Top Stats Row -->
+            <section class="stats-grid">
+                <!-- Total People Card -->
+                <div class="stat-card total-people">
+                    <div class="card-header">
+                        <h3>Total People</h3>
+                        <span class="icon">👥</span>
+                    </div>
+                    <div class="card-value" id="totalPeople">0</div>
+                    <div class="card-footer">Currently in view</div>
+                </div>
+
+                <!-- Entry Count Card -->
+                <div class="stat-card entry-count">
+                    <div class="card-header">
+                        <h3>Entry Count</h3>
+                        <span class="icon">➡️</span>
+                    </div>
+                    <div class="card-value" id="entryCount">0</div>
+                    <div class="card-footer">People entered</div>
+                </div>
+
+                <!-- Exit Count Card -->
+                <div class="stat-card exit-count">
+                    <div class="card-header">
+                        <h3>Exit Count</h3>
+                        <span class="icon">⬅️</span>
+                    </div>
+                    <div class="card-value" id="exitCount">0</div>
+                    <div class="card-footer">People exited</div>
+                </div>
+
+                <!-- Net Count Card -->
+                <div class="stat-card net-count">
+                    <div class="card-header">
+                        <h3>Net Flow</h3>
+                        <span class="icon">📈</span>
+                    </div>
+                    <div class="card-value" id="netCount">0</div>
+                    <div class="card-footer">Entry - Exit</div>
+                </div>
+            </section>
+
+            <!-- Zone Analysis Section -->
+            <section class="zones-section">
+                <h2 class="section-title">Zone Analysis</h2>
+                <div class="zones-grid" id="zonesContainer">
+                    <!-- Zones will be dynamically generated here -->
+                </div>
+            </section>
+
+            <!-- Video Feed Section -->
+            <section class="video-section">
+                <h2 class="section-title">Live Camera Feed</h2>
+                <div class="video-container">
+                    <img id="videoFeed" src="" alt="Live video feed from camera" class="video-feed">
+                    <div class="video-placeholder" id="videoPlaceholder">
+                        <p>Waiting for video feed...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts-section">
+                <h2 class="section-title">Analytics</h2>
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Traffic Flow</h3>
+                        <canvas id="flowChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Zone Distribution</h3>
+                        <canvas id="zoneChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity Log -->
+            <section class="activity-section">
+                <h2 class="section-title">Recent Activity</h2>
+                <div class="activity-log" id="activityLog">
+                    <p class="log-empty">No activity logged yet</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Last Updated: <span id="lastUpdate">--:--:--</span></p>
+            <p>© 2026 Smart People Counter System</p>
+        </footer>
+    </div>
+
+    <!-- Charts Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+</html>
