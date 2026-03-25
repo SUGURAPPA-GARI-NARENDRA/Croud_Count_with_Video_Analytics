@@ -1,0 +1,18 @@
+2026-03-08 12:37:42,828 - INFO - System Booting Up...
+2026-03-08 12:37:42,843 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.206.226.42:5000
+2026-03-08 12:37:42,843 - INFO - [33mPress CTRL+C to quit[0m
+2026-03-08 12:38:36,013 - INFO - System Booting Up...
+2026-03-08 12:38:36,032 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.206.226.42:5000
+2026-03-08 12:38:36,032 - INFO - [33mPress CTRL+C to quit[0m
+2026-03-08 12:41:28,797 - INFO - System Booting Up...
+2026-03-08 12:41:28,806 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.206.226.42:5000
+2026-03-08 12:41:28,807 - INFO - [33mPress CTRL+C to quit[0m

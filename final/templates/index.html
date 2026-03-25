@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>✨ Smart People Counter | Live Dashboard</title>
+  
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Poppins font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- ApexCharts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.45.2/dist/apexcharts.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div id="overloadBanner" class="alert-banner hidden">
+    <i class="fas fa-exclamation-triangle"></i> OVERCROWDING DETECTED
+</div>
+
+<header class="header">
+    <div class="header-left">
+        <h1 class="title">Monitor Console</h1>
+        <button onclick="downloadReport()" class="btn-report">
+            <i class="fas fa-file-download"></i> Generate Report
+        </button>
+    </div>
+    </header>
+
+<!--<section class="activity-card">
+    <h2><i class="fas fa-terminal"></i> System Command Logs</h2>
+    <div class="activity-log" id="systemLogs"></div>
+</section>
+-->
+  <div class="app">
+    <!-- Glass header -->
+    <header class="header">
+      <div class="header-left">
+        <h1 class="title">
+          <i class="fas fa-people-arrows"></i> Smart People Counter
+        </h1>
+        <p class="subtitle">Real‑time crowd analytics & visualization</p>
+      </div>
+      <div class="header-right">
+        <div class="status-indicator" id="statusIndicator">
+          <span class="dot"></span>
+          <span class="status-text">Connecting...</span>
+        </div>
+        <div class="last-update">
+          <i class="far fa-clock"></i>
+          <span id="lastUpdate">--:--:--</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main dashboard -->
+    <main class="dashboard">
+      <!-- Top stats cards -->
+      <section class="stats-grid">
+        <div class="stat-card total-people">
+          <div class="card-icon"><i class="fas fa-users"></i></div>
+          <div class="card-content">
+            <h3>Total People</h3>
+            <div class="value" id="totalPeople">0</div>
+            <span class="label">currently in view</span>
+          </div>
+        </div>
+        <div class="stat-card entry-count">
+          <div class="card-icon"><i class="fas fa-sign-in-alt"></i></div>
+          <div class="card-content">
+            <h3>Entry Count</h3>
+            <div class="value" id="entryCount">0</div>
+            <span class="label">people entered</span>
+          </div>
+        </div>
+        <div class="stat-card exit-count">
+          <div class="card-icon"><i class="fas fa-sign-out-alt"></i></div>
+          <div class="card-content">
+            <h3>Exit Count</h3>
+            <div class="value" id="exitCount">0</div>
+            <span class="label">people exited</span>
+          </div>
+        </div>
+        <div class="stat-card net-flow">
+          <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="card-content">
+            <h3>Net Flow</h3>
+            <div class="value" id="netCount">0</div>
+            <span class="label">entry − exit</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live video & zone occupancy -->
+      <section class="video-zone-row">
+        <div class="video-card">
+          <h2><i class="fas fa-video"></i> Live Camera Feed</h2>
+          <div class="video-container">
+            <img src="{{ url_for('video_feed') }}" alt="Live feed" class="video-feed">
+          </div>
+        </div>
+        <div class="zone-card">
+          <h2><i class="fas fa-map-pin"></i> Zone Occupancy</h2>
+          <div class="zones-grid" id="zonesContainer">
+            <!-- Dynamically filled by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Charts row -->
+      <section class="charts-row">
+        <div class="chart-card">
+          <h3><i class="fas fa-wave-square"></i> Traffic Flow (last 20 points)</h3>
+          <div id="flowChart" class="chart"></div>
+        </div>
+        <div class="chart-card">
+          <h3><i class="fas fa-chart-pie"></i> Zone Distribution</h3>
+          <div id="zoneChart" class="chart"></div>
+        </div>
+      </section>
+      <section class="glass-card">
+    <div class="card-header">
+        <h3><i class="fas fa-history"></i> Recent Crowd Alerts</h3>
+        <button onclick="loadAlertGallery()" class="refresh-btn">Refresh Gallery</button>
+    </div>
+    <div id="alertGallery" class="alert-grid">
+        <p class="log-empty">No alerts captured yet.</p>
+    </div>
+</section>
+
+      <!-- Activity log -->
+      <section class="activity-card">
+        <h2><i class="fas fa-history"></i> Recent Activity</h2>
+        <div class="activity-log" id="activityLog">
+          <div class="log-empty">Waiting for activity...</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 Smart People Counter — Real‑time insights at a glance</p>
+    </footer>
+  </div>
+
+  <!-- Libraries -->
+  <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.45.2/dist/apexcharts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.umd.js"></script>
+  
+  <!-- Custom JS -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
